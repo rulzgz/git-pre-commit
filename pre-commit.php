@@ -32,7 +32,7 @@
         // PHP linter
 		$lint_output = array();
 		$return = 0;
-    	exec("{$php} -l " . escapeshellarg($file), $lint_output, $return);
+    	exec("{$php} -l " . escapeshellarg($cwd .'\\'. $file), $lint_output, $return);
 
     	// ¿Hay algún error?
 	    if ($return != 0) $exit_status = 1;
