@@ -1,4 +1,4 @@
 <?php
 
 	date();
-	plik plak
+	plik plak a
