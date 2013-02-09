@@ -15,44 +15,44 @@ http://phpmd.org/download/index.html
 Instalación
 ------------
 
-Copiar todo el contenido al directorio <pre>.git/hooks/</pre> de tu repositorio.
+Copiar todo el contenido al directorio <code>.git/hooks/</code> de tu repositorio.
 
 
-Editar el archivo <pre>pre-commit</pre> y cambia las rutas por las correctas para tu caso:
+Editar el archivo <code>pre-commit</code> y cambia las rutas por las correctas para tu caso:
 
-<pre>
+<code>
 #!/bin/sh
 c:\\wamp\\bin\\php\\php5.3.5\\php.exe "C:\\wamp\\www\\git-pre-commit\\.git\\hooks\\pre-commit-files\\pre-commit.php"
-</pre>
+</code>
 
 
-También debes editar el archivo <pre>pre-commit-files/config.php</pre> si quieres usar filtros que necesitan ejecutables externos (phpLinter, phpMessDetector, phpCodeSniffer)
+También debes editar el archivo <code>pre-commit-files/config.php</code> si quieres usar filtros que necesitan ejecutables externos (phpLinter, phpMessDetector, phpCodeSniffer)
 
-<pre>
+```php
     // Paths de los ejecutables
     'php'        => 'C:\\wamp\\bin\\php\\php5.3.5\\php.exe',
     'phpCS'      => 'C:\\wamp\\bin\\php\\php5.3.5\\PEAR\\phpcs.bat',
     'phpMD'      => 'C:\\wamp\\bin\\php\\php5.3.5\\PEAR\\phpmd.bat',	
-</pre>
+```
 
 
 
 Configuración adicional
 -----------------------
 
-En el archivo de configuración <pre>pre-commit-files/config.php</pre> puedes configurar otros aspectos.
+En el archivo de configuración <code>pre-commit-files/config.php</code> puedes configurar otros aspectos.
 
 
-<pre>fileFilter</pre> sirve para especificar los archivos que serán procesados por los filtros, en este caso, solo los archivos .php
+<code>fileFilter</code> sirve para especificar los archivos que serán procesados por los filtros, en este caso, solo los archivos .php
 
-```
+```php
 	'fileFilter' => '/\.php$/',
 ```
 
 
-<pre>filters</pre> es el listado de filtros que procesarán los archivos que hemos elegido
+<code>filters</code> es el listado de filtros que procesarán los archivos que hemos elegido
 
-```
+```php
     'filters'    => array(
         'phpLinter',        // Comprueba si hay errores de sintaxis 'php.exe -l'
         'phpCodeSniffer',   // CodeSniffer, se pueden definir una serie de reglas para hacer código homogeneo
