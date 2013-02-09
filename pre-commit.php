@@ -12,9 +12,12 @@
 	$rc     = 0;
 	// gets the sha1 for the previous to the last current commit if not the head
 	exec('git rev-parse --verify HEAD 2> NUL', $output, $rc); // Linux y mac os
+echo($output);
+
 	// if resource controle is found then use HEAD else use an unknown sha1
 	if ($rc == 0)  $against = 'HEAD';
 	else           $against = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
+
 	// gets the list of the files that have changed
 	exec('git diff-index --cached --name-only '. $against, $output);
 
