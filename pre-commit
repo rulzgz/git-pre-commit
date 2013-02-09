@@ -1,5 +1,2 @@
-#!c:/wamp/bin/php/php5.3.5/php.exe
-
-echo 'wtf';
-exit(0);
-
+#!/bin/sh
+c:\\wamp\\bin\\php\\php5.3.5\\php.exe "C:\\wamp\\www\\git-pre-commit\\pre-commit.php"
