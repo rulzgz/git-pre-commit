@@ -33,9 +33,9 @@
 	// Cargamos los filtros 
 	foreach ($filters as $filter)
 	{
-		require_once('./filter/'.$filter.'.php');
+		require_once('filter/'.$filter.'.php');
 	}
-	
+	exit(1);
 
 	// Vamos recorriendo todos los archivos y ejecutando las acciones con cada uno que pase el filtro de archivos
 	foreach ($modifiedFiles as $file)
