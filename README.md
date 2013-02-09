@@ -20,10 +20,10 @@ Copiar todo el contenido al directorio <code>.git/hooks/</code> de tu repositori
 
 Editar el archivo <code>pre-commit</code> y cambia las rutas por las correctas para tu caso:
 
-<code>
+```
 #!/bin/sh
 c:\\wamp\\bin\\php\\php5.3.5\\php.exe "C:\\wamp\\www\\git-pre-commit\\.git\\hooks\\pre-commit-files\\pre-commit.php"
-</code>
+```
 
 
 También debes editar el archivo <code>pre-commit-files/config.php</code> si quieres usar filtros que necesitan ejecutables externos (phpLinter, phpMessDetector, phpCodeSniffer)
