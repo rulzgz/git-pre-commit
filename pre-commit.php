@@ -4,9 +4,6 @@
 	$cwd = dirname(__FILE__);
 	require "{$cwd}/config.php";
 
-	// Deshabilitamos los errores ya que interfieren con el linter
-	error_reporting(0);
-
 	// Si no hay acciones para ejecutar salimos para que prosiga el commit
 	if (!is_array($actions) || count($actions) == 0) exit(0);
 
