@@ -4,8 +4,10 @@
 	{
 		$md_output = array();
 		$md_return = 0;
-		
-		exec("{$cfg['phpMD']} " . escapeshellarg($file) . " text " . implode(',', $cfg['rules']) , $md_output, $md_return);
+
+		// Preparamos la llamada al ejecutable externo
+		$command = $cfg['phpMD'] . ' ' . $file . ' text ' . implode(',', $cfg['rules']);
+		exec($command , $md_output, $md_return);
 
 		// ¿Hay algún error? Lo mostramos y cancelamos el commit
 	    if ($md_return != 0)

@@ -5,7 +5,10 @@
 
 		$cs_output = array();
 		$cs_return = 0;
-		exec("{$cfg['phpCS']} --standard=". $cfg['standard'] ." ". escapeshellarg($file), $cs_output, $cs_return);
+
+		// Creamos el comando para llamar al programa externo
+		$command = $cfg['phpCS'] . ' --standard=' . $cfg['standard'] .' '. $file;
+		exec($command, $cs_output, $cs_return);
 
 		// ¿Hay algún error? Lo mostramos y cancelamos el commit
 	    if ($cs_return != 0)

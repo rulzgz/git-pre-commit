@@ -1,8 +1,11 @@
 <?php
 
+	// Obtenemos los paths tanto de los hooks como de los archivos del repositorio
+	$pathHooks = realpath(__DIR__);
+	$pathFiles = realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
+
 	// Cargamos la configuración
-	$cwd = dirname(__FILE__);
-	require "{$cwd}/config.php";
+	require_once ($pathHooks.DIRECTORY_SEPARATOR.'config.php');
 
 	// Si no hay acciones para ejecutar salimos para que prosiga el commit
 	if (!is_array($config['filters']) || count($config['filters']) == 0) exit(0);
@@ -19,7 +22,7 @@
 
 	// Obtenemos la lista de archivos que han cambiado desde el último commit o bien todos ellos
 	$modifiedFiles = array();
-	exec('git diff-index --cached --name-only --diff-filter=[AMR] '. $against, $modifiedFiles);
+	exec('git diff-index --cached --name-only --diff-filter=[ACMR] '. $against, $modifiedFiles);
 
 	// Por defecto no hay errores
 	$exit_status = 0;
@@ -27,6 +30,9 @@
 	// Mostramos un banner
 	echo "\n\n\n\n================================================================================\n";
 	echo " Validación del commit antes de aceptarlo";
+	echo "\n================================================================================\n";
+	echo "\nSe comprobarán los siguientes archivos: \n\n";
+	echo $pathFiles . DIRECTORY_SEPARATOR . implode("\n".$pathFiles . DIRECTORY_SEPARATOR, $modifiedFiles) . "\n";
 	echo "\n================================================================================\n\n\n\n";
 
 	// Vamos recorriendo todos los archivos y ejecutando las acciones con cada uno que pase el filtro de archivos
@@ -35,18 +41,18 @@
 		// Únicamente procesamos los archivos definidos en config.php
         if (!preg_match($config['fileFilter'], $file)) continue;
 
-        // Añadimos el path completo al archivo
-        $filePath = $cwd .'\\'. $file;
+        // Añadimos el path completo al archivo, teniendo en cuenta la ruta del repositorio
+        $filePath = $pathFiles . DIRECTORY_SEPARATOR . $file;
 
 		// Pasamos los filtros		
 		foreach ($config['filters'] as $filter) 
 		{
-			require_once('filter/'.$filter.'.php');
+			require_once('filter' . DIRECTORY_SEPARATOR . $filter . '.php');
 			$resp = call_user_func($filter, $filePath, $config);
 
+			// Con el primer error encontrado ya se bloquea el commit
 			if ($resp == 1) $exit_status = 1;
 		}
-
 	}
 
 	// Mostramos la conclusión

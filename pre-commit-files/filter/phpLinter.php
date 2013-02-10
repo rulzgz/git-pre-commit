@@ -6,7 +6,8 @@
         $lint_output = array();
         $return = 0;
 
-        exec("{$cfg['php']} -l " . escapeshellarg($file) . " 2> NUL", $lint_output, $return);
+        $command = $cfg['php'] . ' -l ' . $file . ' 2> NUL';
+        exec($command, $lint_output, $return);
 
         if ($return != 0)
         {
